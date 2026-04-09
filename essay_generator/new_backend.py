@@ -9,9 +9,9 @@ from typing import TypedDict, Annotated, List
 import operator
 
 from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain_core.pydantic_v1 import BaseModel
+from pydantic import BaseModel
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
-from langchain.chains import create_structured_output_runnable
+#from langchain.chains import create_structured_output_runnable
 from tavily import TavilyClient
 
 from langgraph.graph import StateGraph, END
@@ -48,7 +48,7 @@ conn = sqlite3.connect("checkpoints.db", check_same_thread=False)
 memory = SqliteSaver(conn)
 
 # Inicializa o modelo de linguagem
-model = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0)
+model = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite", temperature=0)
 
 # Cria um Runnable para a saída estruturada (forma correta para Gemini)
 structured_model = model.with_structured_output(Queries)
